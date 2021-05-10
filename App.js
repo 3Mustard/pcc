@@ -5,7 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import LandingScreeen from './components/auth/landing';
 
-const stack = createStackNavigator();
+const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
