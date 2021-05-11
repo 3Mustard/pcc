@@ -10,6 +10,8 @@ export class Register extends Component {
             password: '',
             username: ''
         }
+        // Bind function to component
+        this.onSignUp = this.onSignUp.bind(this);
     }
 
     render() {
