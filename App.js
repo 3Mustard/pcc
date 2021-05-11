@@ -2,10 +2,11 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import * as firebase from 'firebase';
+import firebase from "firebase";
 
 // COMPONENT IMPORTS
 import LandingScreeen from './components/auth/Landing';
+import RegisterScreen from './components/auth/Register';
 
 // FIREBASE CONFIG
 const firebaseConfig = {
@@ -17,10 +18,9 @@ const firebaseConfig = {
   appId: "1:873101787172:web:b6950a2a7fd16f680ed8b1",
   measurementId: "G-LHF4B3GGCF"
 };
-// RUN FIREBASE IF NOT RUNNING
-if(firebase.apps.length === 0){
-  firebase.initializeApp(firebaseConfig)
-}
+
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+
 // CREATE STACK FOR NAVIGATION
 const Stack = createStackNavigator();
 
@@ -31,6 +31,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Landing">
         <Stack.Screen name="Landing" component={LandingScreeen} options={{ headerShown: false }}/>
+        <Stack.Screen name="Register" component={RegisterScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
