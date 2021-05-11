@@ -9,7 +9,7 @@ import firebase from "firebase";
 import LandingScreeen from './components/auth/Landing';
 import RegisterScreen from './components/auth/Register';
 
-// FIREBASE CONFIG
+// FIREBASE CONFIG >>>>>>>>>>>>>>>>>>>>>>>>  REMOVE IN PRODUCTION <<<<<<<<<<<<<<<<<<<<<<<<<
 const firebaseConfig = {
   apiKey: "AIzaSyCQw_hQVsvw6djP7e5KuoylrPTt6iQGubQ",
   authDomain: "photocc-9d078.firebaseapp.com",
@@ -18,6 +18,7 @@ const firebaseConfig = {
   messagingSenderId: "873101787172",
   appId: "1:873101787172:web:b6950a2a7fd16f680ed8b1",
   measurementId: "G-LHF4B3GGCF"
+  // ^^^^^^^^^^^^ >>>>>>>>>>>>>>>>>>>>>>>>  REMOVE IN PRODUCTION <<<<<<<<<<<<<<<<<<<<<<<<<
 };
 // INIT FIREBASE
 const firebaseApp = firebase.initializeApp(firebaseConfig);
