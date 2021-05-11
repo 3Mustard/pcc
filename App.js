@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -24,15 +25,63 @@ const firebaseApp = firebase.initializeApp(firebaseConfig);
 // CREATE STACK FOR NAVIGATION
 const Stack = createStackNavigator();
 
-export default function App() {
-  return (
-    // ROUTING WITH REACT NAVIGATION AND REACT NAVIGATION STACK PACKAGES
-    // DOCUMENTATION @https://reactnavigation.org/docs/getting-started AND @https://reactnavigation.org/docs/stack-navigator/
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Landing">
-        <Stack.Screen name="Landing" component={LandingScreeen} options={{ headerShown: false }}/>
-        <Stack.Screen name="Register" component={RegisterScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+export class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      loaded: false,
+    }
+  }
+
+  componentDidMount(){
+    //Check if a user is logged in
+    firebase.auth().onAuthStateChanged((user) => {
+      if(!user){
+        this.setState({
+          loggedIn: false,
+          loaded: false,
+        });
+      } else {
+        console.log(user)
+        this.setState({
+          loggedIn: true,
+          loaded: true,
+        });
+      }
+    });
+  }
+
+  render() {
+    const { loggedIn, loaded } = this.state;
+
+    // NOT LOADED
+    if(!loaded){
+      return(
+        <View style={{ flew: 1, justifyContent: 'center'}}>
+          <Text>Loading</Text>
+        </View>
+      )
+    }
+    // NOT LOGGED IN
+    if(!loggedIn){
+      return (
+        // ROUTING WITH REACT NAVIGATION AND REACT NAVIGATION STACK PACKAGES
+        // DOCUMENTATION @https://reactnavigation.org/docs/getting-started AND @https://reactnavigation.org/docs/stack-navigator/
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Landing">
+            <Stack.Screen name="Landing" component={LandingScreeen} options={{ headerShown: false }}/>
+            <Stack.Screen name="Register" component={RegisterScreen} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      )
+    }
+    // LOGGED IN
+    return(
+      <View style={{ flew: 1, justifyContent: 'center'}}>
+        <Text>User is Logged In</Text>
+      </View>
+    )
+  }
 }
+
+export default App
