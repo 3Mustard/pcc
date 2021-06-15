@@ -22,7 +22,7 @@ export class Register extends Component {
         firebase.auth().createUserWithEmailAndPassword(email, password)
             .then((response) => {
                 // ADD USER TO FIRESTORE COLLECTION 'users' WHERE DOCUMENT = USER ID
-                firebase,firestore().collection("users")
+                firebase.firestore().collection("users")
                     .doc(firebase.auth().currentUser.uid)
                     .set({
                         username,

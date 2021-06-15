@@ -36,11 +36,12 @@ export class App extends Component {
 
   componentDidMount(){
     //Check if a user is logged in
+    //firebase.auth().signOut()
     firebase.auth().onAuthStateChanged((user) => {
       if(!user){
         this.setState({
           loggedIn: false,
-          loaded: false,
+          loaded: true,
         });
       } else {
         console.log(user)

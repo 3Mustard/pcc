@@ -12,12 +12,12 @@ export class Login extends Component {
             password: ''
         }
         // Bind function to component
-        this.onSignUp = this.onSignUp.bind(this);
+        this.onSignIn = this.onSignIn.bind(this);
     }
 
-    onSignUp(){
+    onSignIn(){
         const { email, password } = this.state;
-        firebase.auth().singInWithEmailAndPassword(email, password)
+        firebase.auth().signInWithEmailAndPassword(email, password)
             .then((response) => {
                 console.log(response)
             })
@@ -40,8 +40,8 @@ export class Login extends Component {
                 />
 
                 <Button 
-                    onPress={() => this.onSignUp()}
-                    title="Sign Up"
+                    onPress={() => this.onSignIn()}
+                    title="Sign Ip"
                 />
             </View>
         )
