@@ -1,13 +1,21 @@
-import React, { Component } from 'react';
-import { View, Text } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import React, { Component } from 'react'
+import { View, Text } from 'react-native'
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
 
-import firebase from "firebase";
+import firebase from "firebase"
+
+// STORE
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware } from 'redux'
+import rootReducer from './redux/reducers'
+import thunk from 'redux-thunk'
+const store  = createStore(rootReducer, applyMiddleware(thunk))
 
 // COMPONENT IMPORTS
-import LandingScreeen from './components/auth/Landing';
-import RegisterScreen from './components/auth/Register';
+import LandingScreeen from './components/auth/Landing'
+import RegisterScreen from './components/auth/Register'
+import MainScreen from './components/Main'
 
 // FIREBASE CONFIG >>>>>>>>>>>>>>>>>>>>>>>>  REMOVE IN PRODUCTION <<<<<<<<<<<<<<<<<<<<<<<<<
 const firebaseConfig = {
@@ -79,9 +87,9 @@ export class App extends Component {
     }
     // LOGGED IN
     return(
-      <View style={{ flew: 1, justifyContent: 'center'}}>
-        <Text>User is Logged In</Text>
-      </View>
+      <Provider store={store}>
+        <MainScreen/>
+      </Provider>
     )
   }
 }
