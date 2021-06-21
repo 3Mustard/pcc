@@ -10,8 +10,12 @@ import { fetchUser } from '../redux/actions/index'
 
 //components
 import FeedScreen from '../components/main/Feed'
+import ProfileScreen from '../components/main/Profile'
 
 const Tab = createBottomTabNavigator()
+const EmptyScreen = () => {
+    return(null)
+}
 
 export class Main extends Component {
     
@@ -26,6 +30,27 @@ export class Main extends Component {
                     options={{
                         tabBarIcon: ({color, size}) => (
                             <MaterialCommunityIcons name="home" color={color} size={26}/>
+                        ),
+                    }}
+                />
+                {/* routes to App.js AddScreen */}
+                <Tab.Screen name="AddContainer" component={EmptyScreen} 
+                    listeners={({ navigation }) => ({
+                        tabPress: event => {
+                            event.preventDefault()
+                            navigation.navigate("Add")
+                        }
+                    })}
+                    options={{
+                        tabBarIcon: ({color, size}) => (
+                            <MaterialCommunityIcons name="plus-box" color={color} size={26}/>
+                        ),
+                    }}
+                />
+                <Tab.Screen name="Profile" component={ProfileScreen} 
+                    options={{
+                        tabBarIcon: ({color, size}) => (
+                            <MaterialCommunityIcons name="account-circle" color={color} size={26}/>
                         ),
                     }}
                 />
