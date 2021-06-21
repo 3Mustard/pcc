@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 // store
 import { connect } from 'react-redux'
@@ -21,7 +22,13 @@ export class Main extends Component {
     render() {
         return (
             <Tab.Navigator>
-                <Tab.Screen name="Feed" component={FeedScreen}></Tab.Screen>
+                <Tab.Screen name="Feed" component={FeedScreen} 
+                    options={{
+                        tabBarIcon: ({color, size}) => (
+                            <MaterialCommunityIcons name="home" color={color} size={26}/>
+                        ),
+                    }}
+                />
             </Tab.Navigator>
         )
     }
