@@ -11,9 +11,19 @@ export class Main extends Component {
     }
 
     render() {
+        const { currentUser } = this.props
+        console.log("current user", currentUser)
+
+        if(currentUser==undefined){
+            return (
+                <View>
+                    <Text>Loading</Text>
+                </View>
+            )
+        }
         return (
             <View style={{ flew: 1, justifyContent: 'center'}}>
-                <Text>User is Logged In</Text>
+                <Text>{currentUser.username} is Logged In</Text>
             </View>
         )
     }
@@ -24,4 +34,4 @@ const mapStateToProps = (store) => ({
 })
 const mapDispatchToProps = (dispatch) => bindActionCreators({fetchUser}, dispatch)
 
-export default connect(null, mapDispatchToProps)(Main)
+export default connect(mapStateToProps, mapDispatchToProps)(Main)
