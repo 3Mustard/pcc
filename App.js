@@ -13,9 +13,10 @@ import thunk from 'redux-thunk'
 const store  = createStore(rootReducer, applyMiddleware(thunk))
 
 // COMPONENT IMPORTS
-import LandingScreeen from './components/auth/Landing'
+import LandingScreen from './components/auth/Landing'
 import RegisterScreen from './components/auth/Register'
 import MainScreen from './components/Main'
+import LoginScreen from './components/auth/Login'
 
 // FIREBASE CONFIG >>>>>>>>>>>>>>>>>>>>>>>>  REMOVE IN PRODUCTION <<<<<<<<<<<<<<<<<<<<<<<<<
 const firebaseConfig = {
@@ -79,8 +80,9 @@ export class App extends Component {
         // DOCUMENTATION @https://reactnavigation.org/docs/getting-started AND @https://reactnavigation.org/docs/stack-navigator/
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Landing">
-            <Stack.Screen name="Landing" component={LandingScreeen} options={{ headerShown: false }}/>
+            <Stack.Screen name="Landing" component={LandingScreen} options={{ headerShown: false }}/>
             <Stack.Screen name="Register" component={RegisterScreen} />
+            <Stack.Screen name="Login" component={LoginScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       )
@@ -88,7 +90,11 @@ export class App extends Component {
     // LOGGED IN
     return(
       <Provider store={store}>
-        <MainScreen/>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Main">
+              <Stack.Screen name="Main" component={MainScreen} options={{ headerShown: false }}/>
+          </Stack.Navigator>
+        </NavigationContainer>
       </Provider>
     )
   }
