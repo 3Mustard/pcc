@@ -33,7 +33,7 @@ export class Main extends Component {
                         ),
                     }}
                 />
-                {/* routes to App.js AddScreen */}
+                {/* routes to App.js AddScreen in order to remove tab navigation, must pass a component so used an empty one*/}
                 <Tab.Screen name="AddContainer" component={EmptyScreen} 
                     listeners={({ navigation }) => ({
                         tabPress: event => {
