@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { StyleSheet, Text, View, Button, Image } from 'react-native'
 import { Camera } from 'expo-camera'
 import * as ImagePicker from 'expo-image-picker'
+import { NavigationContainer } from '@react-navigation/native'
 
-export default function Add() {
+export default function Add({navigation}) {
   const [hasCameraPermission, setHasCameraPermission] = useState(null)
   const [hasGalleryPermission, setHasGalleryPermission] = useState(null)
   const [camera, setCamera] = useState(null)
@@ -33,12 +34,10 @@ export default function Add() {
       allowsEditing: true,
       aspect: [1, 1],
       quality: 1,
-    });
-
-    console.log(result);
+    })
 
     if (!result.cancelled) {
-      setImage(result.uri);
+      setImage(result.uri)
     }
   };
 
@@ -66,12 +65,13 @@ export default function Add() {
             type === Camera.Constants.Type.back
               ? Camera.Constants.Type.front
               : Camera.Constants.Type.back
-            );
+            )
           }}>
       </Button>
 
       <Button title="Take Picture" onPress={() => takePicture()}></Button>
       <Button title="Pick an image from camera roll" onPress={pickImage} />
+      <Button title="Save" onPress={() => navigation.navigate('Save', {image})} />
       {image && <Image source={{ uri: image }} style={styles.flex1}/>}
     </View>
   );
